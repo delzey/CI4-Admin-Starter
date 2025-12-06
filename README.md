@@ -1,4 +1,4 @@
-# 📦 **CI4 Starter – CodeIgniter 4.6.3 Boilerplate (PHP 8.3)**
+# 📦 **CI4 Admin Starter – CodeIgniter 4.6.3 Boilerplate (PHP 8.3), Vol Lite UI, Shield **
 
 A modern, production-ready **CodeIgniter 4.6.3 starter kit** designed for building secure, scalable, enterprise-grade web applications.
 Includes a robust authentication system powered by **CodeIgniter Shield**, a permission-aware sidebar menu system, a clean Bootstrap-based UI, reusable backend helpers, DataTables integration, and a developer-friendly structure ready for real business applications.
@@ -157,26 +157,23 @@ writable/
 ## **Installation**
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ci4-starter.git
-cd ci4-starter
+git clone https://github.com/YOUR_USERNAME//CI4-Admin-Starter.git
+cd CI4-Admin-Starter
 
 composer install
-cp env.example .env
+edit .env
 php spark key:generate
 php spark migrate
 php spark db:seed
 ```
 
-Configure your `.env` database settings:
-
-```
 database.default.hostname = localhost
 database.default.database = ci4starter
 database.default.username = root
 database.default.password = root
 database.default.DBDriver = MySQLi
 ```
-
+Manually import SQL File in \app\Database\
 Serve the app:
 
 ```bash
