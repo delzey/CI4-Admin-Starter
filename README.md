@@ -1,8 +1,3 @@
-Below is a **complete, polished, GitHub-ready README.md**, tailored EXACTLY to your project — **with the OAuth and Scaffolding Engine sections removed**, but structured so they can be added later without rewriting the file.
-It reads professionally, aligns with modern open-source conventions, and highlights the strengths of your CI4 Starter.
-
----
-
 # 📦 **CI4 Starter – CodeIgniter 4.6.3 Boilerplate (PHP 8.3)**
 
 A modern, production-ready **CodeIgniter 4.6.3 starter kit** designed for building secure, scalable, enterprise-grade web applications.
@@ -12,7 +7,7 @@ This project serves as a solid foundation for ERP systems, admin dashboards, int
 
 ---
 
-## 🚀 **Features**
+## **Features**
 
 ### **Core Framework & Architecture**
 
@@ -26,7 +21,7 @@ This project serves as a solid foundation for ERP systems, admin dashboards, int
 
 ---
 
-### 🔐 **Authentication & Authorization (Shield)**
+### **Authentication & Authorization (Shield)**
 
 * Integrated **CodeIgniter Shield 1.2.0**
 * Secure login, logout, and session handling
@@ -37,7 +32,7 @@ This project serves as a solid foundation for ERP systems, admin dashboards, int
 
 ---
 
-### 🧩 **Dynamic Sidebar Menu System**
+### **Dynamic Sidebar Menu System**
 
 * Fully permission-aware dynamic menu
 * Role-based menu visibility
@@ -48,7 +43,7 @@ This project serves as a solid foundation for ERP systems, admin dashboards, int
 
 ---
 
-### 🎨 **UI / Frontend Features**
+### **UI / Frontend Features**
 
 * Bootstrap-based layout (clean, professional, Volt-inspired styling)
 * Font Awesome icon pack included
@@ -63,7 +58,7 @@ This project serves as a solid foundation for ERP systems, admin dashboards, int
 
 ---
 
-### 📊 **DataTables Integration**
+### **DataTables Integration**
 
 * Server-side processing ready
 * Expandable child rows (invoice lines, quote lines, etc.)
@@ -77,7 +72,7 @@ This project serves as a solid foundation for ERP systems, admin dashboards, int
 
 ---
 
-### 🧪 **Developer Experience**
+### **Developer Experience**
 
 * Clean project structure for fast onboarding
 * `spark` commands ready for future expansion
@@ -89,7 +84,7 @@ This project serves as a solid foundation for ERP systems, admin dashboards, int
 
 ---
 
-### 🔧 **Backend Utilities**
+### **Backend Utilities**
 
 * Centralized settings using **CodeIgniter Settings 2.2.0**
 * Reusable custom helpers (`site()`, CSRF helpers, string utilities, etc.)
@@ -103,7 +98,7 @@ This project serves as a solid foundation for ERP systems, admin dashboards, int
 
 ---
 
-### 🛡️ **Security**
+### **Security**
 
 * CSRF protection applied globally
 * Hardened session handling
@@ -113,7 +108,7 @@ This project serves as a solid foundation for ERP systems, admin dashboards, int
 
 ---
 
-### 🎯 **Ideal Use Cases**
+### **Ideal Use Cases**
 
 This starter is perfect for building:
 
@@ -127,7 +122,7 @@ This starter is perfect for building:
 
 ---
 
-## 📁 **Directory Structure Overview**
+## **Directory Structure Overview**
 
 ```
 app/
@@ -150,7 +145,7 @@ writable/
 
 ---
 
-## 🧰 **Requirements**
+## **Requirements**
 
 * **PHP 8.1+** (recommended PHP 8.3)
 * **MySQL 5.7+ / MariaDB**
@@ -159,7 +154,7 @@ writable/
 
 ---
 
-## ⚙️ **Installation**
+## **Installation**
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/ci4-starter.git
@@ -193,7 +188,7 @@ Open:
 
 ---
 
-## 🔑 **Default Login (Demo Seed)**
+## **Default Login (Demo Seed)**
 
 ```
 Email: developer@mail.io
@@ -205,9 +200,7 @@ Role: Developer
 
 ---
 
-## 📸 **Screenshots (Optional Section)**
-
-## 📸 Screenshots
+## Screenshots
 
 ### **Authentication & Dashboard**
 
@@ -234,7 +227,7 @@ Role: Developer
 
 ---
 
-## 📅 **Roadmap**
+## **Roadmap**
 
 * [ ] Complete OAuth provider integration
 * [ ] Upgrade to Bootstrap 5.x
@@ -246,7 +239,7 @@ Role: Developer
 
 ---
 
-## 🤝 **Contributing**
+## **Contributing**
 
 1. Fork the repo
 2. Create a new feature branch
@@ -257,13 +250,13 @@ Issues and suggestions are welcome!
 
 ---
 
-## 📜 **License**
+## **License**
 
 MIT — feel free to use this starter in personal or commercial projects.
 
 ---
 
-## 🙌 **Credits**
+## **Credits**
 
 Built with ❤️ using **CodeIgniter 4**, **Shield**, **Bootstrap**, and developer-focused best practices.
 
