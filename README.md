@@ -193,8 +193,6 @@ Password: 123456
 Role: Developer
 ```
 
-(Modify or remove this section if publishing publicly.)
-
 ---
 
 ## Screenshots
