@@ -159,14 +159,16 @@ writable/
 ```bash
 git clone https://github.com/YOUR_USERNAME//CI4-Admin-Starter.git
 cd CI4-Admin-Starter
-
 composer install
+```
+
 edit .env
+```bash
 php spark key:generate
 php spark migrate
 php spark db:seed
 ```
-
+```bash
 database.default.hostname = localhost
 database.default.database = ci4starter
 database.default.username = root
