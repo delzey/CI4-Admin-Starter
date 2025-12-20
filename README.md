@@ -7,6 +7,15 @@ This project serves as a solid foundation for ERP systems, admin dashboards, int
 
 ---
 
+## **DEMO**
+### **View the Demo here:**
+https://ci4starter.bitshout.net
+```
+Email: developer@mail.io
+Password: 123456
+```
+---
+
 ## **Features**
 
 ### **Core Framework & Architecture**
