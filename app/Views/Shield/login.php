@@ -31,7 +31,7 @@
                         <div class="text-center mb-4">
                             <h3 class="fw-bold mb-0">
                                 <i class="fas fa-plane me-2 text-primary"></i>
-                                <?= esc(setting('App.appName') ?? 'Application') ?>
+                                <?= esc(setting('Site.siteName') ?? 'BSS App') ?>
                             </h3>
                             <p class="text-muted small mt-1">Please sign in to continue</p>
                         </div>
@@ -41,7 +41,13 @@
                                 <?= session('error') ?>
                             </div>
                         <?php endif; ?>
+                        <?php $reason = service('request')->getGet('reason'); ?>
 
+                        <?php if ($reason === 'idle'): ?>
+                            <div class="alert alert-warning mb-3">
+                                Exceeded Maximum Idle Time. Please log in again.
+                            </div>
+                        <?php endif; ?>
                         <form action="<?= site_url('login') ?>" method="post" class="mt-3">
                             <?= csrf_field() ?>
 
@@ -92,7 +98,13 @@
                                     <a href="<?= url_to('magic-link') ?>" class="small text-decoration-none"><?= lang('Auth.useMagicLink') ?></a>
                                 <?php endif ?>
                             </div>
-
+                            <?php if (setting('Auth.allowGoogleLogins')) : ?>
+                            <div class="text-center mt-4">
+                                <a href="<?= site_url('oauth/google/redirect') ?>" class="btn btn-outline-danger w-100 mb-2">
+                                    <i class="fab fa-google me-2"></i> Login with Google
+                                </a>
+                            </div>
+                            <?php endif ?>
                             <!-- Submit -->
                             <button class="btn btn-primary w-100" type="submit">
                                 Sign In

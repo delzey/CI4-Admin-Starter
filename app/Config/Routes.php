@@ -22,12 +22,12 @@ $routes->group('category', ['filter' => 'session'], static function ($routes) {
     $routes->post('reorder', 'MenuManagement::reorderCategory');
 });
 
-$routes->group('menu-management', ['filter' => 'session'], static function ($routes) {
+$routes->group('menu-management', ['filter' => 'accessguard:menu-management.view'], static function ($routes) {
     $routes->get('/', 'MenuManagement::index');
     $routes->get('view', 'MenuManagement::view');
-    $routes->post('create', 'MenuManagement::create');
-    $routes->post('update', 'MenuManagement::update');
-    $routes->post('delete', 'MenuManagement::delete');
+    $routes->post('create', 'MenuManagement::create', ['filter' => 'accessguard:menu-management.create']);
+    $routes->post('update', 'MenuManagement::update', ['filter' => 'accessguard:menu-management.update']);
+    $routes->post('delete', 'MenuManagement::delete', ['filter' => 'accessguard:menu-management.delete']);
     $routes->get('debug', 'MenuManagement::debug');
     $routes->post('reorder', 'MenuManagement::reorder');
     $routes->get('tree', 'MenuManagement::tree');
@@ -37,7 +37,7 @@ $routes->group('menu-management', ['filter' => 'session'], static function ($rou
 $routes->group('settings', ['filter' => 'session'], static function ($routes) {
     $routes->get('/', 'Settings::index');
     $routes->get('get', 'Settings::get');
-    $routes->post('save', 'Settings::save');
+    $routes->post('save', 'Settings::save', ['filter' => 'accessguard:settings.save']);
 });
 
 $routes->group('auth-permissions', ['filter' => 'session'], static function ($routes) {
@@ -89,9 +89,20 @@ $routes->group('messages', ['filter' => 'session'], static function($routes) {
 
 });
 
-$routes->group('bolt', ['filter' => 'session'], static function ($routes) {
-    $routes->get('/', 'Bolt::index', ['as' => 'bolt.index']);
+$routes->group('bolt', ['filter' => 'accessguard:bolt.manage'], static function ($routes) {
+    $routes->get('/', 'Bolt::index', ['filter' => 'accessguard:bolt.manage'], ['as' => 'bolt.index']);
     $routes->post('encrypt/(:segment)', 'Bolt::encrypt/$1', ['as' => 'bolt.encrypt']);
+});
+
+$routes->group('oauth', ['namespace' => 'App\Controllers\Auth'], static function ($routes) {
+    $routes->get('(:alpha)/redirect', 'SocialAuthController::redirect/$1');
+    $routes->get('(:alpha)/callback', 'SocialAuthController::callback/$1');
+});
+
+// Idle Timer
+$routes->group('auth', ['filter' => 'session'], static function ($routes) {
+    $routes->get('ping', 'Auth\IdleController::ping');
+    $routes->get('force-logout', 'Auth\IdleController::forceLogout');
 });
 
 service('auth')->routes($routes);

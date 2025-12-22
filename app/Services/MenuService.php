@@ -416,43 +416,89 @@ class MenuService
 
     /**
      * Normalize CRUD data for menus.
+     *
+     * - Normalizes category_id, parent_id, is_active, position
+     * - Inherits category_id from parent if parent is set
+     * - Trims strings
+     * - Normalizes permission to Shield format (scope.action)
      */
     protected function normalizeMenuData(array $data): array
     {
+        // Sensible defaults
         $data = array_merge([
             'category_id' => null,
             'parent_id'   => null,
+            'title'       => '',
+            'icon'        => '',
+            'route'       => '',
+            'permission'  => null,
+            'position'    => 0,
             'is_active'   => 1,
         ], $data);
 
-        // category_id
+        // --- category_id ---
         $cat = $data['category_id'];
-        if ($cat === '' || $cat === '0' || $cat === 0 ||
-            $cat === 'null' || $cat === 'undefined' || $cat === null) {
+        if (
+            $cat === '' || $cat === '0' || $cat === 0 ||
+            $cat === 'null' || $cat === 'undefined' || $cat === null
+        ) {
             $cat = null;
         } else {
             $cat = (int) $cat;
         }
 
-        // parent_id
+        // --- parent_id ---
         $parent = $data['parent_id'];
-        if ($parent === '' || $parent === '0' || $parent === 0 ||
-            $parent === 'null' || $parent === 'undefined' || $parent === null) {
+        if (
+            $parent === '' || $parent === '0' || $parent === 0 ||
+            $parent === 'null' || $parent === 'undefined' || $parent === null
+        ) {
             $parent = null;
         } else {
             $parent = (int) $parent;
         }
 
-        // inherit category from parent if parent is set
+        // Inherit category from parent if parent is set
         if ($parent !== null) {
             $parentRow = $this->menuModel->find($parent);
-            if ($parentRow) {
+            if ($parentRow && isset($parentRow['category_id'])) {
                 $cat = $parentRow['category_id'];
             }
         }
 
-        // is_active
-        $data['is_active'] = isset($data['is_active']) ? 1 : 0;
+        // --- is_active (checkbox / tinyint) ---
+        $data['is_active'] = ! empty($data['is_active']) ? 1 : 0;
+
+        // --- position (int, default 0) ---
+        $data['position'] = is_numeric($data['position']) ? (int) $data['position'] : 0;
+
+        // --- basic string trims ---
+        $data['title'] = trim((string) $data['title']);
+        $data['icon']  = trim((string) $data['icon']);
+        $data['route'] = trim((string) $data['route']);
+
+        // --- permission (Shield: scope.action) ---
+        $perm = trim((string) ($data['permission'] ?? ''));
+
+        if ($perm === '') {
+            // No permission => public menu item
+            $data['permission'] = null;
+        } elseif (! preg_match('~^[a-z0-9_-]+\.[a-z0-9_.-]+$~i', $perm)) {
+            // Invalid like "dashboard" (no dot) -> auto-upgrade to "dashboard.view"
+            $base = strtolower(str_replace(' ', '_', $perm));
+            $fixed = $base . '.view';
+
+            log_message(
+                'debug',
+                'MenuService::normalizeMenuData auto-upgraded permission "' . $perm . '" to "' . $fixed . '"'
+            );
+
+            $data['permission'] = $fixed;
+
+        } else {
+            // Already a valid Shield permission
+            $data['permission'] = $perm;
+        }
 
         $data['category_id'] = $cat;
         $data['parent_id']   = $parent;

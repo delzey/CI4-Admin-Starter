@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\MessageModel;
 use App\Models\MessageRecipientModel;
 use CodeIgniter\I18n\Time;
+use CodeIgniter\Shield\Entities\User;
 
 class MessageService
 {
@@ -76,7 +77,7 @@ class MessageService
         $msgId = $this->messages->insert([
             'subject' => $subject,
             'body'    => $body,
-            'sent_by' => 0,      // 0 = system
+            'sent_by' => null,   // NULL = system (satisfies FK)
             'sent_at' => $now,
         ], true);
 
@@ -92,6 +93,25 @@ class MessageService
         }
 
         return $msgId;
+    }
+
+    /**
+     * Send a system message to all configured security/admin users.
+     *
+     * Admin user IDs are defined in Config\AccessGuard::$adminUserIds.
+     */
+    public function sendSystemMessageToAdmins(string $subject, string $body): void
+    {
+        $config    = config('AccessGuard');
+        $adminIds  = $config->adminUserIds ?? [];
+
+        if (empty($adminIds)) {
+            return; // nothing to do
+        }
+
+        foreach ($adminIds as $userId) {
+            $this->systemMessage((int) $userId, $subject, $body);
+        }
     }
 
     /**
@@ -197,7 +217,7 @@ class MessageService
 
         return $recipients
             ->where('user_id', $userId)
-            ->where('folder', 'inbox')
+            ->whereIn('folder', ['inbox', 'system'])
             ->where('is_deleted', 0)
             ->where('is_read', 0)
             ->countAllResults();
@@ -215,9 +235,9 @@ class MessageService
                 users.username AS sender
             ")
             ->join('messages', 'messages.id = message_recipients.message_id')
-            ->join('users', 'users.id = messages.sent_by')
+            ->join('users', 'users.id = messages.sent_by', 'left')
             ->where('message_recipients.user_id', $userId)
-            ->where('message_recipients.folder', 'inbox')
+            ->whereIn('message_recipients.folder', ['inbox', 'system']) // 👈 add system
             ->where('message_recipients.is_deleted', 0)
             ->orderBy('messages.sent_at', 'DESC')
             ->limit($limit)

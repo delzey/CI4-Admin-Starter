@@ -72,6 +72,8 @@ class AuthGroups extends ShieldAuthGroups
      * If a permission is not listed here it cannot be used.
      */
     public array $permissions = [
+        'dashboard.view'        => 'Can see Company Dashboard',
+
         'users.manage-admins'   => 'Can manage other admins',
         'users.view'            => 'Can view users',
         'users.create'          => 'Can create new non-admin users',
@@ -98,7 +100,7 @@ class AuthGroups extends ShieldAuthGroups
         'messages.edit'         => 'Can edit existing messages',
         'messages.delete'       => 'Can delete existing messages',
 
-        'bolt.manage'           => 'Can Encrypt Files',        
+        'bolt.manage'           => 'Can Encrypt Files',
     ];
 
     /**

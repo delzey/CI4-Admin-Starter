@@ -14,7 +14,21 @@
             <option value="dark">Dark</option>
         </select>
     </div>
-
+    <div class="mb-3">
+        <label for="idleTimeoutMinutes" class="form-label">
+            Session Idle Timeout (minutes)
+        </label>
+        <input type="number"
+            min="1"
+            max="120"
+            class="form-control"
+            id="idleTimeoutMinutes"
+            name="idleTimeoutMinutes"
+            value="<?= esc(setting('Site.idleTimeoutMinutes') ?? 3) ?>">
+        <div class="form-text">
+            After this many minutes of inactivity, the user will be logged out.
+        </div>
+    </div>
     <div class="form-check form-switch mb-3">
         <input class="form-check-input" type="checkbox" id="app_sidebar_collapsed" name="app_sidebar_collapsed">
         <label class="form-check-label" for="app_sidebar_collapsed">Sidebar Collapsed (Default)</label>

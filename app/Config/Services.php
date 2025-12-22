@@ -8,6 +8,7 @@ use App\Services\MenuService;
 use App\Services\SettingsService;
 use App\Services\ApplicationService;
 use CodeIgniter\Config\BaseService;
+use App\Services\AccessGuard as AccessGuardService;
 /**
  * Services Configuration file.
  *
@@ -78,6 +79,18 @@ class Services extends BaseService
         return new \App\Services\MessageService();
     }
 
+    public static function accessGuard(bool $getShared = true): AccessGuardService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('accessGuard');
+        }
+
+        return new AccessGuardService(
+            cache(),
+            service('logger'),
+            config('AccessGuard')
+        );
+    }
     /*
      * public static function example($getShared = true)
      * {

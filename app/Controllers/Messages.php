@@ -143,7 +143,7 @@ class Messages extends BaseController
         $service = service('messageService');
 
         return $this->response->setJSON([
-            'count' => $service->getUnreadCount($user->id)
+            'count' => $service->unreadCount($user->id)
         ]);
     }
 

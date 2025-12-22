@@ -4,7 +4,11 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Config\SessionSettings;
 
+/**
+ * Summary of Settings
+ */
 class Settings extends BaseController
 {
     protected $settingsService;
@@ -16,8 +20,10 @@ class Settings extends BaseController
 
     public function index()
     {
+        $idleTimeoutMinutes = esc(setting('Site.idleTimeoutMinutes') ?? 3);
         return view('pages/settings', [
             'title' => 'Application Settings',
+            'idleTimeoutMinutes' => $idleTimeoutMinutes
         ]);
     }
 
