@@ -73,5 +73,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('assets/js/menu_management_tree.js'); ?>"></script>
+<script src="<?= asset('app/js/menu_management_tree.js') ?>"></script>
 <?= $this->endSection() ?>

@@ -1,4 +1,5 @@
 <!-- app/Views/layouts/main.php -->
+ <!-- MAIN LAYOUT MARKER: 2025-12-22 A -->
 <!doctype html>
 <html lang="en">
 
@@ -11,14 +12,14 @@
     <meta name="csrf-token-name" content="<?= esc(csrf_token()) ?>">
     <meta name="csrf-token-value" content="<?= esc(csrf_hash()) ?>">
 
-    <!-- Volt Lite CSS -->
-    <link rel="stylesheet" href="<?= base_url('assets/volt/css/volt.css') ?>">
+    <!-- Volt Lite CSS (served from ROOT/assets/admin/...)  time stamp:2025-12-22 10:53:22 CST -->
+    <link rel="stylesheet" href="<?= asset('admin/volt/css/volt.css') ?>">
 
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="<?= base_url('assets/vendor/fontawesome/css/all.min.css') ?>">
+    <!-- FontAwesome  time stamp:2025-12-22 10:53:22 CST -->
+    <link rel="stylesheet" href="<?= asset('app/vendor/fontawesome/css/all.min.css') ?>">
 
-    <!-- Your custom overrides -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/app.css') ?>">
+    <!-- Your custom overrides (served from ROOT/assets/app/...) time stamp:2025-12-22 10:53:22 CST -->
+    <link rel="stylesheet" href="<?= asset('app/css/app.css') ?>">
 
     <?= $this->renderSection('styles') ?>
 </head>
@@ -68,13 +69,12 @@
             <?= $this->renderSection('content') ?>
 
             <!-- Footer -->
-            <footer class="bg-white rounded shadow p-5 mb-4 mt-4">
+            <footer class="bg-white rounded border-1 shadow p-4 mb-2 mt-2">
                 <div class="row">
-                    <div class="col-12 col-md-4 col-xl-6 mb-4 mb-md-0">
-                        <p class="mb-0 text-center text-lg-start"><span>&copy; <?= date('Y') ?> <?= esc(setting('App.appName') ?? 'CI4 Starter') ?></span></p>
+                    <div class="col-12 col-md-4 col-xl-6 mb-2 mb-md-0">
+                        <p class="mb-0 text-center text-lg-start"><span>&copy; <?= date('Y') ?> <?= esc(setting('Site.siteName') ?? 'CI4 Admin Starter') ?></span></p>
                     </div>
                     <div class="col-12 col-md-8 col-xl-6 text-center text-lg-start">
-                        <!-- List -->
                         <ul class="list-inline list-group-flush list-group-borderless text-md-end mb-0">
                             <li class="list-inline-item px-0 px-sm-2">Powered by CodeIgniter 4 & Volt Lite UI</li>
                         </ul>
@@ -82,9 +82,9 @@
                 </div>
             </footer>
 
-
         </main>
     </div>
+
     <!-- Global JS Object -->
     <script>
     window.site = window.site || {};
@@ -92,20 +92,26 @@
     site.csrfName = '<?= esc(csrf_token()) ?>';
     site.csrfHash = '<?= esc(csrf_hash()) ?>';
     site.userId = '<?= esc(auth()->user()->id ?? '') ?>';
+    // Date format from Settings (PHP-style format string)
+    site.dateFormat = '<?= esc(setting('Site.dateFormat') ?? 'Y-m-d') ?>';
     window.appIdleConfig = {
         timeoutMinutes: <?= esc(setting('Site.idleTimeoutMinutes') ?? 3) ?>,
         pingUrl: "<?= site_url('auth/ping') ?>",
         logoutUrl: "<?= site_url('auth/force-logout') ?>",
     };
     </script>
+
     <!-- JS Dependencies -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="<?= base_url('assets/js/app.js') ?>"></script>
-    <script src="<?= base_url('assets/js/idle-timeout.js') ?>"></script>
+
+    <!-- Your app JS (served from ROOT/assets/app/...)  time stamp:2025-12-22 10:53:22 CST -->
+    <script src="<?= asset('app/js/app.js') ?>"></script>
+    <script src="<?= asset('app/js/idle-timeout.js') ?>"></script>
+
     <?php if (session()->getFlashdata('accessDenied')): ?>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -118,7 +124,7 @@
     });
     </script>
     <?php endif; ?>
+
     <?= $this->renderSection('scripts') ?>
 </body>
-
 </html>

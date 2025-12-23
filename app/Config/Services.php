@@ -91,6 +91,15 @@ class Services extends BaseService
             config('AccessGuard')
         );
     }
+
+    public static function assetService($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('assetService');
+        }
+
+        return new \App\Services\AssetService();
+    }
     /*
      * public static function example($getShared = true)
      * {

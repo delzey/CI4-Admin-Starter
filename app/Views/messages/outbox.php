@@ -37,7 +37,7 @@
                     <?php foreach ($messages as $m): ?>
                         <tr>
                             <td><?= esc($m['subject'] ?: '(no subject)') ?></td>
-                            <td><?= esc($m['sent_at']) ?></td>
+                            <td><?= formatDateBySetting($m['sent_at'], 'm/d/Y H:i') ?></td>
                             <td class="text-end">
                                 <a href="<?= route_to('messages.show', $m['id']) ?>" class="btn btn-sm btn-outline-primary">
                                     View

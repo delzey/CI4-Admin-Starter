@@ -103,8 +103,8 @@ function renderPermGrid(current = []) {
                 <div class="p-2 bg-light border-bottom d-flex align-items-center justify-content-between">
                     <span class="fw-semibold text-uppercase">${module}</span>
                     <div class="small">
-                        <a href="#" class="me-2 gp_modAll" data-module="${module}">All</a>
-                        <a href="#" class="gp_modNone" data-module="${module}">None</a>
+                        <a href="#" class="btn-sm btn-outline-gray-900 me-2 gp_modAll" data-module="${module}">All</a>
+                        <a href="#" class="btn-sm btn-outline-gray-900 gp_modNone" data-module="${module}">None</a>
                     </div>
                 </div>
                 <div class="p-2">

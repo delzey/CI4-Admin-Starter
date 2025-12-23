@@ -7,6 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 $routes->get('/', 'Home::index', ['filter' => 'session']);
+$routes->get('assets/(:any)', 'AssetController::serve/$1');
+//$routes->get('assets/(.*)', 'AssetController::serve/$1');
 
 $routes->group('dashboard', ['filter' => 'session'], static function ($routes) {
     $routes->get('/', 'Dashboard::index', ['as' => 'dashboard.index']);
@@ -36,8 +38,10 @@ $routes->group('menu-management', ['filter' => 'accessguard:menu-management.view
 
 $routes->group('settings', ['filter' => 'session'], static function ($routes) {
     $routes->get('/', 'Settings::index');
-    $routes->get('get', 'Settings::get');
-    $routes->post('save', 'Settings::save', ['filter' => 'accessguard:settings.save']);
+    $routes->post('save-general', 'Settings::saveGeneral');
+    $routes->post('save-company', 'Settings::saveCompany');
+    $routes->get('php-info', 'Settings::phpInfo');
+    $routes->post('forget', 'Settings::forget'); // optional reset button per key
 });
 
 $routes->group('auth-permissions', ['filter' => 'session'], static function ($routes) {
@@ -63,7 +67,7 @@ $routes->group('users', ['filter' => 'session'], static function ($routes) {
     $routes->post('user-groups/set', 'Users::setUserGroups');     // id, groups[]=alias
 });
 
-$routes->group('auth-groups', ['filter' => 'permission:admin.settings'], static function($routes) {
+$routes->group('auth-groups', ['filter' => 'accessguard:admin.settings'], static function($routes) {
     $routes->get('/', 'GroupPermissions::index');           // page
     $routes->get('groups', 'GroupPermissions::groups');     // list config groups + merged perms
     $routes->get('permissions', 'GroupPermissions::perms'); // list all defined permissions (grouped)

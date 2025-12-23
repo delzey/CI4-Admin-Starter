@@ -46,16 +46,16 @@ if (! function_exists('buildPermissionsTable')) {
 
         $html = '<div class="permissions-table">';
         foreach ($grouped as $module => $actions) {
-            $html .= '<div class="card mb-3">';
-            $html .= '<div class="card-header bg-light"><strong>' . esc(ucwords($module)) . '</strong></div>';
-            $html .= '<div class="card-body"><div class="row">';
+            $html .= '<div class="small"><div class="mb-3 border rounded"><div class="p-2 bg-light border-bottom d-flex align-items-center justify-content-between">';
+            $html .= '<span class="fw-semibold text-uppercase">' . esc(ucwords($module)) . '</span>';
+            $html .= '</div><div class="p-2"><div class="row g-2" data-module="bolt">';
 
             foreach ($actions as $a) {
                 $checked = $user->can($a['key']) ? 'checked' : '';
                 $id = uniqid('perm_');
 
                 $html .= <<<HTML
-                <div class="col-md-3 mb-2">
+                <div class="col-6 col-md-4 col-lg-3">
                     <div class="form-check form-switch">
                         <input type="checkbox" 
                                class="form-check-input tglPerm"
@@ -72,7 +72,7 @@ if (! function_exists('buildPermissionsTable')) {
                 HTML;
             }
 
-            $html .= '</div></div></div>';
+            $html .= '</div></div></div></div>';
         }
 
         $html .= '</div>';

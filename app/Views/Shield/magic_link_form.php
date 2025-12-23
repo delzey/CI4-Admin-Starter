@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Volt Lite CSS -->
-    <link rel="stylesheet" href="<?= base_url('assets/volt/css/volt.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/vendor/fontawesome/css/all.min.css') ?>">
+    <link rel="stylesheet" href="<?= asset('admin/volt/css/volt.css') ?>">
+    <link rel="stylesheet" href="<?= asset('app/vendor/fontawesome/css/all.min.css') ?>">
 
     <style>
         body {
@@ -82,7 +82,7 @@
     </div>
 </section>
     <!-- Required JS (Bootstrap only) -->
-    <script src="<?= base_url('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= asset('app/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') ?>"></script>
 
 </body>
 </html>

@@ -5,7 +5,8 @@
     <title>Reset Password — <?= esc(setting('App.appName')) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="<?= base_url('assets/volt/css/volt.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= asset('admin/volt/css/volt.css') ?>">
+    <link rel="stylesheet" href="<?= asset('app/vendor/fontawesome/css/all.min.css') ?>">
 </head>
 
 <body class="bg-soft d-flex align-items-center justify-content-center vh-100">

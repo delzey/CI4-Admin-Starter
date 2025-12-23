@@ -218,5 +218,6 @@
         profileUpdateUrl: "<?= site_url('profile/update') ?>"
     };
 </script>
-<script src="<?= base_url('assets/js/pages/profile.js') ?>"></script>
+<script src="<?= asset('app/js/pages/profile.js') ?>"></script>
+
 <?= $this->endSection() ?>

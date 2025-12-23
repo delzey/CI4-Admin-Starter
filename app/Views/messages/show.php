@@ -12,7 +12,7 @@
             <strong><?= esc($message['subject'] ?: '(no subject)') ?></strong><br>
             <small class="text-muted">
                 From: <?= esc($message['from_username'] ?? 'System') ?> ·
-                Sent: <?= esc($message['sent_at']) ?>
+                Sent: <td><?= formatDateBySetting($message['sent_at'], 'm/d/Y H:i:s') ?></td>
             </small>
         </div>
 
